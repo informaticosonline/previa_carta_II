@@ -1,4 +1,4 @@
-cdocument.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM cargado - Iniciando script...');
     
     // ============================================
