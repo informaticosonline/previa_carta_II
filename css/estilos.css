@@ -266,7 +266,7 @@ body {
     width: 100%;
     max-width: 860px;
     background: radial-gradient(circle at top, #2b1a10, #050301);
-    border-radius: 18px;
+    border-radius: 12px;
     padding: 25px;
     color: #f2f2f2;
     box-shadow: inset 0 0 30px rgba(255,255,255,0.05),
