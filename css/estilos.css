@@ -11,7 +11,7 @@
    ESTILOS GENERALES
    ============================================================ */
 body {
-    background: linear-gradient(180deg, #f6efe6, #e8dccf);
+    background: #f9c101;
     font-family: Arial, sans-serif;
     min-height: 100vh;
     padding: 20px;
@@ -65,7 +65,7 @@ body {
 
 .intro-texto h1 {
     font-size: 34px;
-    color: #75391C;
+    color: #000000;
 }
 
 .intro-texto h2 {
@@ -78,6 +78,7 @@ body {
     max-width: 100%;
     height: auto;
     display: block;
+    border-radius: 8px;
 }
 
 /* =============================
