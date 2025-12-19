@@ -1,86 +1,236 @@
 /* Reinicio básico */
+/* ============================================================
+   REINICIO BÁSICO
+   ============================================================ */
 * {
     box-sizing: border-box;
-}
-
-/* Fondo general */
-body {
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
-    font-family: Arial, sans-serif;
 }
 
-/* Contenedor centrado */
+/* ============================================================
+   ESTILOS GENERALES
+   ============================================================ */
+body {
+    background: linear-gradient(180deg, #f6efe6, #e8dccf);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
 .carta-contenedor {
     width: 100%;
-    max-width: 900px;     
-    margin: 0 auto;
-    padding: 10px;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;      /* CENTRA LAS IMÁGENES */
+    align-items: center;
+    background: linear-gradient(180deg, #6b3a1e, #4a2412);
+    border-radius: 22px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 1;
 }
 
-/* Imágenes */
-.carta-imagen {
-    width: 100%;              /* SE AJUSTAN AL ANCHO DEL MÓVIL */
-    max-width: 100%;          /* NUNCA SOBREPASAN EL CONTENEDOR */
+/* ============================================================
+   INTRO PRESENTACIÓN (AJUSTE CENTRADO)
+   ============================================================ */
+.intro-presentacion {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto 30px auto;
+    padding: 10px 15px;
+    gap: 10px;
+}
+
+.intro-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: right;
+}
+
+.intro-texto h1,
+.intro-texto h2 {
+    margin: 0;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #333;
+}
+
+.intro-texto h1 {
+    font-size: 34px;
+    color: #75391C;
+}
+
+.intro-texto h2 {
+    font-size: 26px;
+    color: #555;
+}
+
+.logo-intro {
+    width: 150px;
+    max-width: 100%;
     height: auto;
     display: block;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+/* =============================
+   RESPONSIVE (MÓVIL)
+   ============================= */
+@media (max-width: 700px) {
+    body {
+        padding: 10px;
+    }
+    
+    .intro-presentacion {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        margin: 10px auto 20px auto;
+    }
+
+    .intro-texto {
+        text-align: center;
+        gap: 4px;
+    }
+
+    .intro-texto h1 {
+        font-size: 28px;
+    }
+
+    .intro-texto h2 {
+        font-size: 22px;
+    }
+
+    .logo-intro {
+        width: 130px;
+    }
+}
+
+/* ============================================================
+   FECHA AUTOMÁTICA
+   ============================================================ */
 .fecha-actualizacion {
     width: 100%;
     text-align: center;
     color: #01a1db;
     font-size: 14px;
-    margin: 0 auto 10px auto;
-    font-family: 'Roboto Condensed', Arial, sans-serif; /* 🔵 NUEVA FUENTE */
-    font-weight: 300;  /* muy parecida a la minúscula de la imagen */
-    letter-spacing: 0.5px; /* un punto extra de claridad */
+    margin: 10px auto;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
-/* Footer del logo */
+/* ============================================================
+   BOTONES DE CONTACTO
+   ============================================================ */
+.contacto-botones {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
+    width: 100%;
+}
+
+.btn-contacto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 22px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    gap: 10px;
+    transition: 0.2s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.btn-telefono { 
+    background-color: #0b2346; 
+}
+
+.btn-whatsapp2 { 
+    background-color: #25d366; 
+}
+
+.icono-svg svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+}
+
+.btn-contacto:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+
+@media (max-width: 600px) {
+    .contacto-botones {
+        flex-direction: column;
+    }
+    .btn-contacto {
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   FOOTER CON LOGO
+   ============================================================ */
 .footer-logo {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;      /* Centra verticalmente también */
     margin-top: 10px;
     margin-bottom: 20px;
-
-    padding: 0;               /* evita desplazamientos */
-    text-align: center;       /* refuerzo para móviles */
+    text-align: center;
 }
 
-/* Imagen del logo */
 .logo-footer {
-    width: 220px;             /* PC */
-    max-width: 70%;           /* móviles normales */
+    width: 220px;
+    max-width: 70%;
     height: auto;
     opacity: 0.9;
-    transition: opacity 0.3s ease;
-    display: block;           /* evita que inline afecte alineación */
-    margin: 0 auto;           /* CENTRADO FORZADO */
+    transition: 0.3s ease;
+    display: block;
+    margin: 0 auto;
 }
 
 .logo-footer:hover {
     opacity: 1;
 }
 
+@media (max-width: 380px) {
+    .logo-footer {
+        width: 150px;
+        max-width: 65%;
+        margin: 20px auto 10px;
+    }
+}
+
+/* ============================================================
+   BOTÓN SUBIR
+   ============================================================ */
 .btn-subir {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 50px;
     height: 50px;
-    background: rgba(1, 161, 219, 0.3);  /* 🔵 azul transparente */
-    color: #01a1db;                       /* 🔵 flecha azul sólida */
-    border: 2px solid #01a1db;            /* 🔵 borde azul bonito */
+    background: rgba(1, 161, 219, 0.3);
+    color: #01a1db;
+    border: 2px solid #01a1db;
     border-radius: 50%;
     font-size: 22px;
     display: none;
@@ -88,16 +238,17 @@ body {
     align-items: center;
     cursor: pointer;
     z-index: 9999;
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    transition: 0.3s ease;
+    border: none;
+    outline: none;
 }
 
 .btn-subir:hover {
     opacity: 1;
-    background: rgba(1, 161, 219, 0.5);   /* un poco menos transparente al pasar */
+    background: rgba(1, 161, 219, 0.5);
     transform: scale(1.1);
 }
 
-/* Más pequeño en móviles */
 @media (max-width: 480px) {
     .btn-subir {
         width: 40px;
@@ -108,23 +259,796 @@ body {
     }
 }
 
-/* Móviles pequeños (≤380px) */
-@media (max-width: 380px) {
-    .logo-footer {
-        width: 150px;
-        max-width: 65%;
-        margin: 20px auto 10px;  /* centrar con margen reforzado */
+/* ============================================================
+   CARTA PREMIUM OSCURA
+   ============================================================ */
+.carta-premium {
+    width: 100%;
+    max-width: 860px;
+    background: radial-gradient(circle at top, #2b1a10, #050301);
+    border-radius: 18px;
+    padding: 25px;
+    color: #f2f2f2;
+    box-shadow: inset 0 0 30px rgba(255,255,255,0.05),
+                0 10px 30px rgba(0,0,0,0.7);
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+}
+
+.carta-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.carta-header h1 {
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+.carta-header p {
+    margin: 5px 0;
+    color: #d6b067;
+    font-size: 18px;
+}
+
+.carta-header span {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.bloque-categoria {
+    margin-bottom: 40px;
+}
+
+.bloque-categoria h2 {
+    color: #d6b067;
+    border-bottom: 2px solid rgba(214,176,103,0.4);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   ESTRUCTURA DE PRECIOS Y ALINEACIÓN
+========================= */
+.cabecera-precios {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.cabecera-precios h2 {
+    margin: 0;
+    flex: 1;
+}
+
+.col-precios {
+    display: flex;
+    gap: 40px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #aaa;
+    justify-content: flex-end;
+    min-width: 150px;
+}
+
+.col-precios span {
+    width: 60px;
+    text-align: center;
+    display: inline-block;
+}
+
+/* =========================
+   ESTRUCTURA DE FILAS CON IMÁGENES - CLICABLES
+========================= */
+.fila-plato {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 12px 5px;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.fila-plato:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Indicador visual de clic (lupa) */
+.fila-plato::after {
+    content: "🔍";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    color: #d6b067;
+    z-index: 2;
+}
+
+.fila-plato:hover::after {
+    opacity: 0.7;
+}
+
+/* Imagen del plato - IZQUIERDA EN PC */
+.imagen-plato {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    border: 2px solid rgba(214,176,103,0.3);
+    order: 1; /* Primera posición en PC */
+    position: relative;
+    z-index: 1;
+}
+
+.imagen-plato img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.imagen-plato img:hover {
+    transform: scale(1.05);
+}
+
+/* Información del plato */
+.info-plato {
+    flex: 1;
+    max-width: calc(100% - 250px);
+    order: 2; /* Segunda posición en PC */
+    position: relative;
+    z-index: 1;
+}
+
+.fila-plato strong {
+    font-size: 17px;
+    color: #ffffff;
+    display: block;
+}
+
+.fila-plato p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #bbb;
+    line-height: 1.4;
+}
+
+/* Precios - DERECHA EN PC */
+.precios {
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+    min-width: 150px;
+    text-align: right;
+    order: 3; /* Tercera posición en PC */
+    position: relative;
+    z-index: 1;
+}
+
+.precios span {
+    font-weight: bold;
+    color: #01a1db;
+    font-size: 16px;
+    white-space: nowrap;
+    width: 60px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* =========================
+   SISTEMA DE ALÉRGENOS EN PLATOS
+========================= */
+.alergenos-plato {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.alergeno-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: help;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.alergeno-mini:hover {
+    transform: scale(1.1);
+    z-index: 5;
+}
+
+/* Tooltip para alérgenos */
+.alergeno-mini::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.alergeno-mini:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Colores específicos para cada alérgeno */
+.alergeno-mini[data-alergeno="gluten"] { background: #e74c3c; }
+.alergeno-mini[data-alergeno="crustaceos"] { background: #3498db; }
+.alergeno-mini[data-alergeno="huevo"] { background: #f39c12; }
+.alergeno-mini[data-alergeno="pescado"] { background: #1abc9c; }
+.alergeno-mini[data-alergeno="cacahuetes"] { background: #8e44ad; }
+.alergeno-mini[data-alergeno="soja"] { background: #d35400; }
+.alergeno-mini[data-alergeno="lacteos"] { background: #2ecc71; }
+.alergeno-mini[data-alergeno="frutos-cascara"] { background: #9b59b6; }
+.alergeno-mini[data-alergeno="apio"] { background: #27ae60; }
+.alergeno-mini[data-alergeno="mostaza"] { background: #e67e22; }
+.alergeno-mini[data-alergeno="sesamo"] { background: #16a085; }
+.alergeno-mini[data-alergeno="sulfitos"] { background: #c0392b; }
+.alergeno-mini[data-alergeno="altramuces"] { background: #8e44ad; }
+.alergeno-mini[data-alergeno="moluscos"] { background: #2980b9; }
+
+/* =========================
+   LEYENDA DE ALÉRGENOS
+========================= */
+.alergenos-leyenda {
+    background: rgba(43, 26, 16, 0.9);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 860px;
+    width: 100%;
+    border: 2px solid rgba(214, 176, 103, 0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.alergenos-leyenda h3 {
+    color: #d6b067;
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    text-align: center;
+    border-bottom: 1px dashed rgba(214, 176, 103, 0.4);
+    padding-bottom: 10px;
+}
+
+.alergenos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.alergeno-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: background 0.3s ease;
+}
+
+.alergeno-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.alergeno-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: #01a1db;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Colores específicos para cada alérgeno (leyenda) */
+.alergeno-icono[data-alergeno="gluten"] { background: #e74c3c; }
+.alergeno-icono[data-alergeno="crustaceos"] { background: #3498db; }
+.alergeno-icono[data-alergeno="huevo"] { background: #f39c12; }
+.alergeno-icono[data-alergeno="pescado"] { background: #1abc9c; }
+.alergeno-icono[data-alergeno="cacahuetes"] { background: #8e44ad; }
+.alergeno-icono[data-alergeno="soja"] { background: #d35400; }
+.alergeno-icono[data-alergeno="lacteos"] { background: #2ecc71; }
+.alergeno-icono[data-alergeno="frutos-cascara"] { background: #9b59b6; }
+.alergeno-icono[data-alergeno="apio"] { background: #27ae60; }
+.alergeno-icono[data-alergeno="mostaza"] { background: #e67e22; }
+.alergeno-icono[data-alergeno="sesamo"] { background: #16a085; }
+.alergeno-icono[data-alergeno="sulfitos"] { background: #c0392b; }
+.alergeno-icono[data-alergeno="altramuces"] { background: #8e44ad; }
+.alergeno-icono[data-alergeno="moluscos"] { background: #2980b9; }
+
+.alergeno-texto {
+    color: #ddd;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.alergeno-nota {
+    color: #aaa;
+    font-size: 12px;
+    text-align: center;
+    margin: 15px 0 0 0;
+    font-style: italic;
+    line-height: 1.4;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   RESPONSIVE - MÓVIL
+========================= */
+@media (max-width: 768px) {
+    .carta-contenedor {
+        margin: 15px auto;
+        padding: 15px;
+    }
+    
+    .carta-premium {
+        padding: 15px;
+    }
+    
+    /* REORDENACIÓN PARA MÓVIL: Imagen a la DERECHA */
+    .fila-plato {
+        flex-wrap: nowrap;
+        gap: 12px;
+        align-items: center;
+        position: relative;
+        padding-right: 90px; /* Espacio para imagen derecha */
+    }
+    
+    /* Imagen pasa a la DERECHA en móvil */
+    .imagen-plato {
+        order: 3; /* Última posición en móvil */
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+    }
+    
+    .info-plato {
+        order: 1;
+        max-width: calc(100% - 80px);
+        padding-right: 10px;
+    }
+    
+    .precios {
+        order: 2;
+        flex-direction: column;
+        gap: 6px;
+        min-width: auto;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 15px;
+    }
+    
+    .precios span {
+        width: auto;
+        text-align: left;
+        font-size: 15px;
+    }
+    
+    /* Etiquetas TAPA/RACIÓN en móvil */
+    .precios span:nth-child(1)::before {
+        content: "Tapa: ";
+        font-size: 13px;
+        color: #d6b067;
+        margin-right: 6px;
+    }
+    
+    .precios span:nth-child(2)::before {
+        content: "Ración: ";
+        font-size: 13px;
+        color: #d6b067;
+        margin-right: 6px;
+    }
+    
+    /* Ajuste indicador lupa para móvil */
+    .fila-plato::after {
+        right: 80px; /* Para no superponer con la imagen */
+    }
+    
+    /* Ocultar cabecera de precios en móvil */
+    .col-precios {
+        display: none;
+    }
+    
+    /* Ajuste cabecera */
+    .cabecera-precios {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    /* Responsive para leyenda de alérgenos */
+    .alergenos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .alergenos-leyenda {
+        padding: 15px;
+        margin: 20px auto;
+    }
+    
+    .alergeno-item {
+        padding: 4px;
+    }
+    
+    .alergeno-icono {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+    }
+    
+    .alergeno-texto {
+        font-size: 12px;
     }
 }
 
-/* Ajuste especial para pantallas muy pequeñas */
+/* Móvil pequeño */
 @media (max-width: 480px) {
     .carta-contenedor {
-        padding: 5px;
+        padding: 10px;
+        margin: 10px auto;
     }
-    .carta-imagen {
+    
+    .carta-premium {
+        padding: 12px;
+    }
+    
+    .fila-plato {
+        padding-right: 75px;
+        gap: 10px;
+    }
+    
+    .imagen-plato {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+    }
+    
+    .info-plato {
+        max-width: calc(100% - 70px);
+    }
+    
+    .precios {
+        margin-left: 10px;
+        gap: 4px;
+    }
+    
+    .precios span {
+        font-size: 14px;
+    }
+    
+    .precios span::before {
+        font-size: 12px;
+    }
+    
+    .fila-plato::after {
+        right: 70px;
+    }
+    
+    /* Responsive para leyenda de alérgenos móvil pequeño */
+    .alergenos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .alergenos-leyenda {
+        padding: 12px;
+        margin: 15px auto;
+    }
+}
+
+/* ============================================================
+   LIGHTBOX PARA IMÁGENES AMPLIADAS
+   ============================================================ */
+
+/* Fondo oscuro del lightbox */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+/* Cuando está activo */
+.lightbox.activo {
+    display: flex;
+    opacity: 1;
+}
+
+/* Contenedor del contenido */
+.lightbox-contenido {
+    background: linear-gradient(180deg, #2b1a10, #050301);
+    border-radius: 20px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(214, 176, 103, 0.3);
+    animation: lightboxAparece 0.4s ease forwards;
+    transform-origin: center;
+}
+
+@keyframes lightboxAparece {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Botón cerrar */
+.lightbox-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10001;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.lightbox-cerrar:hover {
+    background: rgba(214, 176, 103, 0.9);
+    transform: rotate(90deg);
+}
+
+/* Contenedor de la imagen */
+.lightbox-imagen-contenedor {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+}
+
+.lightbox-imagen-contenedor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.lightbox-imagen-contenedor img:hover {
+    transform: scale(1.02);
+}
+
+/* Información del plato */
+.lightbox-info {
+    padding: 25px;
+    color: white;
+    background: linear-gradient(0deg, rgba(5,3,1,1) 0%, rgba(43,26,16,0.9) 100%);
+}
+
+.lightbox-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    color: #d6b067;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 400;
+}
+
+.lightbox-info p {
+    margin: 0 0 20px 0;
+    color: #bbb;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Precios en el lightbox */
+.lightbox-precios {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-precios span {
+    font-size: 20px;
+    color: #01a1db;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.lightbox-precios span::before {
+    content: attr(data-tipo) ": ";
+    font-size: 14px;
+    color: #d6b067;
+    font-weight: normal;
+    margin-right: 8px;
+}
+
+/* Ajuste para postres (un solo precio) */
+.lightbox-precios.postre {
+    justify-content: flex-start;
+    gap: 0;
+}
+
+.lightbox-precios.postre span::before {
+    content: "Porción: ";
+}
+
+/* =========================
+   RESPONSIVE LIGHTBOX
+========================= */
+@media (max-width: 768px) {
+    .lightbox {
+        padding: 10px;
+    }
+    
+    .lightbox-contenido {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .lightbox-imagen-contenedor {
+        height: 50vh;
+    }
+    
+    .lightbox-info {
+        padding: 20px;
+    }
+    
+    .lightbox-info h3 {
+        font-size: 24px;
+    }
+    
+    .lightbox-info p {
+        font-size: 15px;
+    }
+    
+    .lightbox-precios {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .lightbox-precios span {
+        font-size: 18px;
+    }
+    
+    .lightbox-cerrar {
+        width: 35px;
+        height: 35px;
+        font-size: 24px;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lightbox-imagen-contenedor {
+        height: 40vh;
+    }
+    
+    .lightbox-info {
+        padding: 15px;
+    }
+    
+    .lightbox-info h3 {
+        font-size: 22px;
+    }
+    
+    .lightbox-info p {
+        font-size: 14px;
         margin-bottom: 15px;
     }
+    
+    .lightbox-precios {
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    .lightbox-precios span {
+        font-size: 17px;
+    }
+    
+    .lightbox-cerrar {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+/* =========================
+   MEJORAS DE ACCESIBILIDAD
+========================= */
+.fila-plato:focus {
+    outline: 2px solid #01a1db;
+    outline-offset: 2px;
+}
+
+.lightbox-cerrar:focus {
+    outline: 2px solid #01a1db;
+    outline-offset: 2px;
+}
+
+/* =========================
+   ESTILOS PARA IMÁGENES FALTANTES
+========================= */
+.imagen-plato img[src=""] {
+    background: linear-gradient(45deg, #2b1a10, #4a2412);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen-plato img[src=""]::after {
+    content: "🍽️";
+    font-size: 24px;
+    color: #d6b067;
 }
 
 
