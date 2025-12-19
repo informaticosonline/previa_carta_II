@@ -1,214 +1,470 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM cargado - Iniciando script...');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Bar Rey</title>
+
+    <!-- Fuente Roboto Condensed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <!-- Intro con texto + logo -->
+    <section class="intro-presentacion">
+        <div class="intro-texto">
+            <h1>Bienvenido a</h1>
+            <h2>Welcome to</h2>
+        </div>
+        <div class="intro-logo">
+            <img src="img/atrayana.webp" alt="BarRey" class="logo-intro">
+        </div>
+    </section>    
     
-    // ============================================
-    // LIGHTBOX - CÓDIGO DEPURADO
-    // ============================================
-    
-    // Elementos del lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImagen = document.getElementById('lightbox-imagen');
-    const lightboxTitulo = document.getElementById('lightbox-titulo');
-    const lightboxDescripcion = document.getElementById('lightbox-descripcion');
-    const lightboxPrecios = document.getElementById('lightbox-precios');
-    const lightboxCerrar = document.querySelector('.lightbox-cerrar');
-    
-    console.log('Elementos lightbox:', {
-        lightbox,
-        lightboxImagen,
-        lightboxTitulo,
-        lightboxDescripcion,
-        lightboxPrecios,
-        lightboxCerrar
-    });
-    
-    // Hacer cada fila de plato clicable
-    const filasPlato = document.querySelectorAll('.fila-plato');
-    console.log('Filas de plato encontradas:', filasPlato.length);
-    
-    filasPlato.forEach((fila, index) => {
-        fila.style.cursor = 'pointer';
-        fila.setAttribute('title', 'Haz clic para ver detalles');
+    <main class="carta-contenedor">
+        <section class="carta-premium">
+            <div class="carta-header">
+                <h1>LA ATRAYANA</h1>
+                <p>Tapas & Cocina Casera</p>
+                <span>CARTA · Precios en euros · IVA incluido</span>
+            </div>
         
-        fila.addEventListener('click', function(e) {
-            console.log('Clic en fila:', index);
-            
-            // Prevenir que se active si se hace clic en enlaces dentro de la fila
-            if (e.target.tagName === 'A' || e.target.closest('a')) {
-                console.log('Clic en enlace, ignorando...');
-                return;
-            }
-            
-            // Obtener datos del plato
-            const imagen = this.querySelector('.imagen-plato img');
-            const titulo = this.querySelector('.info-plato strong');
-            const descripcion = this.querySelector('.info-plato p');
-            const precios = this.querySelectorAll('.precios span');
-            
-            console.log('Datos encontrados:', {
-                imagen: imagen ? 'Sí' : 'No',
-                titulo: titulo ? 'Sí' : 'No',
-                descripcion: descripcion ? 'Sí' : 'No',
-                precios: precios.length
-            });
-            
-            // Si hay imagen y título, mostrar lightbox
-            if (imagen && titulo) {
-                console.log('Mostrando lightbox con imagen:', imagen.src);
-                
-                // Configurar imagen
-                lightboxImagen.src = imagen.src;
-                lightboxImagen.alt = imagen.alt;
-                
-                // Configurar título y descripción
-                lightboxTitulo.textContent = titulo.textContent;
-                lightboxDescripcion.textContent = descripcion ? descripcion.textContent : '';
-                
-                // Configurar precios
-                lightboxPrecios.innerHTML = '';
-                lightboxPrecios.className = 'lightbox-precios';
-                
-                if (precios.length === 1) {
-                    // Es un postre (un solo precio)
-                    console.log('Postre detectado');
-                    lightboxPrecios.classList.add('postre');
-                    const span = document.createElement('span');
-                    span.textContent = precios[0].textContent;
-                    span.setAttribute('data-tipo', 'Porción');
-                    lightboxPrecios.appendChild(span);
-                } else if (precios.length >= 2) {
-                    // Son tapas (dos precios)
-                    console.log('Tapa/Ración detectada');
-                    const tipos = ['Tapa', 'Ración'];
-                    precios.forEach((precio, index) => {
-                        if (index < 2) { // Solo primeros dos precios
-                            const span = document.createElement('span');
-                            span.textContent = precio.textContent;
-                            span.setAttribute('data-tipo', tipos[index]);
-                            lightboxPrecios.appendChild(span);
-                        }
-                    });
-                }
-                
-                // Mostrar lightbox
-                lightbox.classList.add('activo');
-                document.body.style.overflow = 'hidden'; // Prevenir scroll
-                
-                console.log('Lightbox activado');
-            } else {
-                console.warn('No se encontraron datos necesarios para el lightbox');
-            }
-        });
-    });
-    
-    // Cerrar lightbox con botón
-    if (lightboxCerrar) {
-        lightboxCerrar.addEventListener('click', function() {
-            console.log('Cerrando lightbox con botón');
-            cerrarLightbox();
-        });
-    }
-    
-    // Cerrar lightbox al hacer clic fuera del contenido
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) {
-            console.log('Cerrando lightbox (clic fuera)');
-            cerrarLightbox();
-        }
-    });
-    
-    // Cerrar lightbox con tecla ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('activo')) {
-            console.log('Cerrando lightbox (tecla ESC)');
-            cerrarLightbox();
-        }
-    });
-    
-    function cerrarLightbox() {
-        lightbox.classList.remove('activo');
-        document.body.style.overflow = 'auto'; // Restaurar scroll
+            <!-- =========================
+                 TAPAS Y RACIONES CON IMÁGENES Y ALÉRGENOS
+            ========================== -->
+            <div class="bloque-categoria">
+                <div class="cabecera-precios">
+                    <h2>Tapas y Raciones</h2>
+                    <div class="col-precios">
+                        <span>TAPA</span>
+                        <span>RACIÓN</span>
+                    </div>
+                </div>
         
-        // Limpiar después de la animación
-        setTimeout(() => {
-            lightboxImagen.src = '';
-            lightboxTitulo.textContent = '';
-            lightboxDescripcion.textContent = '';
-            lightboxPrecios.innerHTML = '';
-        }, 300);
-    }
-    
-    console.log('Lightbox configurado correctamente');
-    
-    // ============================================
-    // BOTÓN SUBIR (tu código existente)
-    // ============================================
-    const btnSubir = document.getElementById('btn-subir');
-    
-    if (btnSubir) {
-        console.log('Botón subir encontrado');
+                <!-- Patatas bravas -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/patatas-bravas.webp" alt="Patatas bravas" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Patatas bravas</strong>
+                        <p>Patatas fritas con salsa casera ligeramente picante</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                            <span class="alergeno-mini" title="Mostaza" data-alergeno="mostaza">Ⓜ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>2,50 €</span>
+                        <span>4,50 €</span>
+                    </div>
+                </div>
         
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 30) {
-                btnSubir.style.display = 'flex';
-            } else {
-                btnSubir.style.display = 'none';
-            }
-        });
+                <!-- Croquetas caseras -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/croquetas.webp" alt="Croquetas caseras" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Croquetas caseras</strong>
+                        <p>Cremosas por dentro, crujientes por fuera</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                            <span class="alergeno-mini" title="Lácteos" data-alergeno="lacteos">Ⓛ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>3,00 €</span>
+                        <span>5,00 €</span>
+                    </div>
+                </div>
         
-        btnSubir.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    } else {
-        console.warn('Botón subir no encontrado');
-    }
-    
-    // ============================================
-    // FECHA AUTOMÁTICA (tu código existente)
-    // ============================================
-    const fechaElemento = document.getElementById('fecha-auto');
-    
-    if (fechaElemento) {
-        console.log('Elemento fecha encontrado');
+                <!-- Chicharrones -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/chicharrones.webp" alt="Chicharrones" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Chicharrones</strong>
+                        <p>Carne crujiente al estilo tradicional</p>
+                        <div class="alergenos-plato">
+                            <!-- Sin alérgenos destacados -->
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>3,50 €</span>
+                        <span>5,50 €</span>
+                    </div>
+                </div>
         
-        const hoy = new Date();
+                <!-- Calamares fritos -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/calamares.webp" alt="Calamares fritos" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Calamares fritos</strong>
+                        <p>Rebozados al momento con harina especial</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                            <span class="alergeno-mini" title="Moluscos" data-alergeno="moluscos">Ⓞ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>4,50 €</span>
+                        <span>7,00 €</span>
+                    </div>
+                </div>
         
-        const diasSemana = [
-            'Domingo',
-            'Lunes',
-            'Martes',
-            'Miércoles',
-            'Jueves',
-            'Viernes',
-            'Sábado'
-        ];
+                <!-- Gambas al ajillo -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/gambas-ajillo.webp" alt="Gambas al ajillo" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Gambas al ajillo</strong>
+                        <p>Salteadas con ajo, guindilla y aceite de oliva</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Crustáceos" data-alergeno="crustaceos">Ⓒ</span>
+                            <span class="alergeno-mini" title="Sulfitos" data-alergeno="sulfitos">Ⓣ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>5,50 €</span>
+                        <span>8,50 €</span>
+                    </div>
+                </div>
         
-        const meses = [
-            'enero',
-            'febrero',
-            'marzo',
-            'abril',
-            'mayo',
-            'junio',
-            'julio',
-            'agosto',
-            'septiembre',
-            'octubre',
-            'noviembre',
-            'diciembre'
-        ];
+                <!-- Huevos rotos con jamón -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/huevos-rotos.webp" alt="Huevos rotos con jamón" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Huevos rotos con jamón</strong>
+                        <p>Huevos camperos, patatas y jamón ibérico</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                            <span class="alergeno-mini" title="Sulfitos" data-alergeno="sulfitos">Ⓣ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>4,50 €</span>
+                        <span>7,50 €</span>
+                    </div>
+                </div>
         
-        const diaSemana = diasSemana[hoy.getDay()];
-        const dia = hoy.getDate();
-        const mes = meses[hoy.getMonth()];
-        const ano = hoy.getFullYear();
+                <!-- Solomillo al whisky -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/solomillo-wisky.webp" alt="Solomillo al whisky" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Solomillo al whisky</strong>
+                        <p>Solomillo en salsa suave de whisky</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Sulfitos" data-alergeno="sulfitos">Ⓣ</span>
+                            <span class="alergeno-mini" title="Mostaza" data-alergeno="mostaza">Ⓜ</span>
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>6,50 €</span>
+                        <span>9,50 €</span>
+                    </div>
+                </div>
         
-        fechaElemento.textContent = `${diaSemana}, ${dia} de ${mes} de ${ano}`;
+                <!-- Presa ibérica -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/presa-iberica.webp" alt="Presa ibérica" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Presa ibérica</strong>
+                        <p>A la plancha con sal en escamas</p>
+                        <div class="alergenos-plato">
+                            <!-- Sin alérgenos destacados -->
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>7,00 €</span>
+                        <span>10,50 €</span>
+                    </div>
+                </div>
         
-        console.log('Fecha actualizada:', fechaElemento.textContent);
-    } else {
-        console.warn('Elemento fecha no encontrado');
-    }
-    
-    console.log('Script cargado completamente');
-});
+                <!-- Pulpo a la gallega -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/pulpo-gallega.webp" alt="Pulpo a la gallega" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Pulpo a la gallega</strong>
+                        <p>Pulpo cocido con pimentón y aceite virgen</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Moluscos" data-alergeno="moluscos">Ⓞ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>7,50 €</span>
+                        <span>11,00 €</span>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- =========================
+                 POSTRES CON IMÁGENES Y ALÉRGENOS
+            ========================== -->
+            <div class="bloque-categoria">
+                <div class="cabecera-precios">
+                    <h2>Postres</h2>
+                    <div class="col-precios">
+                        <span>PORCIÓN</span>
+                    </div>
+                </div>
+        
+                <!-- Flan casero -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/flan-casero.webp" alt="Flan casero" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Flan casero</strong>
+                        <p>Delicioso flan de huevo casero con caramelo</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                            <span class="alergeno-mini" title="Lácteos" data-alergeno="lacteos">Ⓛ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>3,00 €</span>
+                    </div>
+                </div>
+        
+                <!-- Tarta de chocolate -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/tarta-chocolate.webp" alt="Tarta de chocolate" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Tarta de chocolate</strong>
+                        <p>Tarta intensa de chocolate negro con base crujiente</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                            <span class="alergeno-mini" title="Lácteos" data-alergeno="lacteos">Ⓛ</span>
+                            <span class="alergeno-mini" title="Frutos de cáscara" data-alergeno="frutos-cascara">Ⓕ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>3,50 €</span>
+                    </div>
+                </div>
+        
+                <!-- Helado variado -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/helado-variado.webp" alt="Helado variado" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Helado variado</strong>
+                        <p>Tres bolas de helado artesanal (vainilla, chocolate, fresa)</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Lácteos" data-alergeno="lacteos">Ⓛ</span>
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                            <span class="alergeno-mini" title="Frutos de cáscara" data-alergeno="frutos-cascara">Ⓕ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>2,50 €</span>
+                    </div>
+                </div>
+        
+                <!-- Tarta de la abuela -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/tarta-abuela.webp" alt="Tarta de la abuela" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Tarta de la abuela</strong>
+                        <p>Bizcocho, crema y natilla con toque de canela</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                            <span class="alergeno-mini" title="Lácteos" data-alergeno="lacteos">Ⓛ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>3,50 €</span>
+                    </div>
+                </div>
+        
+                <!-- Tarta de limón -->
+                <div class="fila-plato">
+                    <div class="imagen-plato">
+                        <img src="img/tarta-limon.webp" alt="Tarta de limón" loading="lazy">
+                    </div>
+                    <div class="info-plato">
+                        <strong>Tarta de limón</strong>
+                        <p>Refrescante tarta de limón con merengue tostado</p>
+                        <div class="alergenos-plato">
+                            <span class="alergeno-mini" title="Gluten" data-alergeno="gluten">Ⓖ</span>
+                            <span class="alergeno-mini" title="Huevo" data-alergeno="huevo">Ⓗ</span>
+                        </div>
+                    </div>
+                    <div class="precios">
+                        <span>3,00 €</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botones de contacto -->
+        <div class="contacto-botones">
+            <!-- Botón llamar -->
+            <a href="tel:854602180" class="btn-contacto btn-telefono">
+                <span class="icono-svg">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 
+                                 1 0 011.05-.24 11.72 11.72 0 003.68.59 1 
+                                 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 
+                                 011-1h3.5a1 1 0 011 1 11.72 11.72 0 
+                                 00.59 3.68 1 1 0 01-.24 1.05l-2.23 2.06z"/>
+                    </svg>
+                </span>
+                Llamar ahora
+            </a>
+
+            <!-- Botón WhatsApp -->
+            <a href="https://wa.me/+346866884XX?text=Hola%2C%20me%20llamo%20" target="_blank"
+               class="btn-contacto btn-whatsapp2">
+                <span class="icono-svg">
+                    <svg viewBox="0 0 32 32">
+                        <path d="M16.002 3.2c-7.065 0-12.8 5.735-12.8 12.8 0 
+                                 2.258.589 4.371 1.619 6.217L3.2 28.8l6.764-1.585A12.73 
+                                 12.73 0 0016 28.802c7.065 0 12.8-5.735 
+                                 12.8-12.8s-5.735-12.8-12.798-12.8zm0 
+                                 23.467c-2.094 0-4.057-.622-5.706-1.688l-.408-.257-4.012.941.941-3.904-.266-.427A10.63 
+                                 10.63 0 015.375 16c0-5.907 
+                                 4.72-10.627 10.627-10.627S26.63 10.093 
+                                 26.63 16c0 5.907-4.72 10.627-10.627 
+                                 10.627zm6.2-7.92c-.34-.17-2.012-.996-2.322-1.11-.31-.113-.535-.17-.76.17-.226.34-.87 
+                                 1.11-1.067 1.336-.197.226-.394.255-.733.085-.34-.17-1.435-.529-2.734-1.685-1.01-.9-1.693-2.01-1.89-2.35-.197-.34-.021-.523.148-.693.152-.152.34-.394.51-.59.17-.197.227-.34.34-.566.113-.226.057-.424-.028-.594-.085-.17-.76-1.832-1.04-2.508-.273-.655-.552-.566-.76-.566-.197 0-.424-.028-.648-.028-.226 
+                                 0-.594.085-.905.424-.31.34-1.187 
+                                 1.16-1.187 2.824 0 1.665 1.215 3.273 1.383 
+                                 3.5.17.226 2.392 3.65 5.8 5.103 3.408 
+                                 1.453 3.408.969 4.02.91.612-.057 
+                                 2.012-.81 2.294-1.594.283-.783.283-1.453.198-1.594-.085-.142-.31-.226-.648-.396z"/>
+                    </svg>
+                </span>
+                WhatsApp
+            </a>
+        </div>
+
+        <!-- ==============================
+             LEYENDA DE ALÉRGENOS
+        =============================== -->
+        <section class="alergenos-leyenda">
+            <h3>🔍 Alérgenos</h3>
+            <div class="alergenos-grid">
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="gluten">Ⓖ</span>
+                    <span class="alergeno-texto">Cereales con gluten</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="crustaceos">Ⓒ</span>
+                    <span class="alergeno-texto">Crustáceos</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="huevo">Ⓗ</span>
+                    <span class="alergeno-texto">Huevo</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="pescado">Ⓟ</span>
+                    <span class="alergeno-texto">Pescado</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="cacahuetes">Ⓚ</span>
+                    <span class="alergeno-texto">Cacahuetes</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="soja">Ⓢ</span>
+                    <span class="alergeno-texto">Soja</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="lacteos">Ⓛ</span>
+                    <span class="alergeno-texto">Lácteos</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="frutos-cascara">Ⓕ</span>
+                    <span class="alergeno-texto">Frutos de cáscara</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="apio">Ⓐ</span>
+                    <span class="alergeno-texto">Apio</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="mostaza">Ⓜ</span>
+                    <span class="alergeno-texto">Mostaza</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="sesamo">Ⓔ</span>
+                    <span class="alergeno-texto">Sésamo</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="sulfitos">Ⓣ</span>
+                    <span class="alergeno-texto">Sulfitos</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="altramuces">Ⓤ</span>
+                    <span class="alergeno-texto">Altramuces</span>
+                </div>
+                <div class="alergeno-item">
+                    <span class="alergeno-icono" data-alergeno="moluscos">Ⓞ</span>
+                    <span class="alergeno-texto">Moluscos</span>
+                </div>
+            </div>
+            <p class="alergeno-nota">Los iconos indican los alérgenos presentes en cada plato. 
+            Consulte con el personal para más información sobre alérgenos y trazas.</p>
+        </section>
+
+    </main>
+
+    <!-- Fecha automática -->
+    <p id="fecha-auto" class="fecha-actualizacion"></p>
+    <p class="fecha-actualizacion">Elaborado por:</p>
+
+    <!-- Footer con logo -->
+    <footer class="footer-logo">
+        <a href="https://informaticosonline.es/" target="_blank">
+            <img src="img/logo-blanco.webp" alt="Logo Informaticos Online" class="logo-footer">
+        </a>
+    </footer>
+
+    <!-- Botón subir -->
+    <button id="btn-subir" class="btn-subir">▲</button>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-contenido">
+            <button class="lightbox-cerrar">&times;</button>
+            <div class="lightbox-imagen-contenedor">
+                <img id="lightbox-imagen" src="" alt="">
+            </div>
+            <div class="lightbox-info">
+                <h3 id="lightbox-titulo"></h3>
+                <p id="lightbox-descripcion"></p>
+                <div class="lightbox-precios" id="lightbox-precios"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS externo -->
+    <script src="js/app.js"></script>
+</body>
+</html>
